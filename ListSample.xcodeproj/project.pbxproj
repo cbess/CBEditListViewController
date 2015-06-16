@@ -14,6 +14,9 @@
 		927382391B2FABA100F2F239 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 927382381B2FABA100F2F239 /* Images.xcassets */; };
 		9273823C1B2FABA100F2F239 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9273823A1B2FABA100F2F239 /* LaunchScreen.xib */; };
 		927382481B2FABA100F2F239 /* ListSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 927382471B2FABA100F2F239 /* ListSampleTests.m */; };
+		927382591B2FAC5600F2F239 /* CBListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 927382581B2FAC5600F2F239 /* CBListViewController.m */; };
+		9273825C1B2FAC6800F2F239 /* CBEditListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273825B1B2FAC6800F2F239 /* CBEditListViewController.m */; };
+		9273825F1B2FB73000F2F239 /* SampleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273825E1B2FB73000F2F239 /* SampleItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,13 @@
 		927382411B2FABA100F2F239 /* ListSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		927382461B2FABA100F2F239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		927382471B2FABA100F2F239 /* ListSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListSampleTests.m; sourceTree = "<group>"; };
+		927382571B2FAC5600F2F239 /* CBListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBListViewController.h; sourceTree = "<group>"; };
+		927382581B2FAC5600F2F239 /* CBListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBListViewController.m; sourceTree = "<group>"; };
+		9273825A1B2FAC6800F2F239 /* CBEditListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBEditListViewController.h; sourceTree = "<group>"; };
+		9273825B1B2FAC6800F2F239 /* CBEditListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBEditListViewController.m; sourceTree = "<group>"; };
+		9273825D1B2FB73000F2F239 /* SampleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleItem.h; path = Classes/SampleItem.h; sourceTree = "<group>"; };
+		9273825E1B2FB73000F2F239 /* SampleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleItem.m; path = Classes/SampleItem.m; sourceTree = "<group>"; };
+		927382601B2FB77100F2F239 /* CBListViewControllerListItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBListViewControllerListItem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +91,11 @@
 		9273822A1B2FABA100F2F239 /* ListSample */ = {
 			isa = PBXGroup;
 			children = (
+				927382561B2FAC4900F2F239 /* CBList */,
 				9273822F1B2FABA100F2F239 /* AppDelegate.h */,
 				927382301B2FABA100F2F239 /* AppDelegate.m */,
+				9273825D1B2FB73000F2F239 /* SampleItem.h */,
+				9273825E1B2FB73000F2F239 /* SampleItem.m */,
 				927382321B2FABA100F2F239 /* ViewController.h */,
 				927382331B2FABA100F2F239 /* ViewController.m */,
 				927382351B2FABA100F2F239 /* Main.storyboard */,
@@ -117,6 +130,19 @@
 				927382461B2FABA100F2F239 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		927382561B2FAC4900F2F239 /* CBList */ = {
+			isa = PBXGroup;
+			children = (
+				927382571B2FAC5600F2F239 /* CBListViewController.h */,
+				927382581B2FAC5600F2F239 /* CBListViewController.m */,
+				9273825A1B2FAC6800F2F239 /* CBEditListViewController.h */,
+				9273825B1B2FAC6800F2F239 /* CBEditListViewController.m */,
+				927382601B2FB77100F2F239 /* CBListViewControllerListItem.h */,
+			);
+			name = CBList;
+			path = Classes/CBList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +246,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				927382341B2FABA100F2F239 /* ViewController.m in Sources */,
+				927382591B2FAC5600F2F239 /* CBListViewController.m in Sources */,
+				9273825F1B2FB73000F2F239 /* SampleItem.m in Sources */,
 				927382311B2FABA100F2F239 /* AppDelegate.m in Sources */,
+				9273825C1B2FAC6800F2F239 /* CBEditListViewController.m in Sources */,
 				9273822E1B2FABA100F2F239 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
