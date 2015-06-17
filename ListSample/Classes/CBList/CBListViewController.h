@@ -24,6 +24,9 @@ typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath *index
 /// The search results displayed in the search list.
 @property (nonatomic, strong) NSArray *searchResults;
 
+/// Normal items or search results, depending on if search is active.
+@property (nonatomic, readonly) NSArray *activeItems;
+
 /**
  Configures the table view. By default it registers the default cell class.
  Avoid calling super to ignore default configuration.
@@ -43,6 +46,9 @@ typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath *index
 
 /// Configures the cell selected block.
 - (void)configureCellSelectedBlock:(CBListViewControllerConfigureCellSelectedBlock)block;
+
+/// Handles the configuration of the specified table view cell at the specified index path
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

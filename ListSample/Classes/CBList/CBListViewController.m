@@ -8,11 +8,9 @@
 
 #import "CBListViewController.h"
 
-static NSString * const kCellIdentifier = @"cell";
+static NSString * const kCellIdentifier = @"cblistcell";
 
 @interface CBListViewController ()
-/// Normal items or search results
-@property (nonatomic, readonly) NSArray *activeItems;
 @property (nonatomic, assign) BOOL searchActive;
 @property (nonatomic, copy) CBListViewControllerConfigureCellBlock configureCellBlock;
 @property (nonatomic, copy) CBListViewControllerConfigureCellSelectedBlock configureCellSelectedBlock;
@@ -54,6 +52,17 @@ static NSString * const kCellIdentifier = @"cell";
     return kCellIdentifier;
 }
 
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    if (self.configureCellBlock) {
+        id aCell = self.configureCellBlock(indexPath, cell);
+        
+        // if a cell is provided, then use it
+        if (aCell) {
+            cell = aCell;
+        }
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -72,14 +81,7 @@ static NSString * const kCellIdentifier = @"cell";
         cell.detailTextLabel.text = [listItem displayDetailTitle];
     }
     
-    if (self.configureCellBlock) {
-        id aCell = self.configureCellBlock(indexPath, cell);
-        
-        // if a cell is provided, then use it
-        if (aCell) {
-            cell = aCell;
-        }
-    }
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }

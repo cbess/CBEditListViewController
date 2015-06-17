@@ -12,6 +12,7 @@
 
 @interface ViewController ()
 @property (nonatomic, strong) CBListViewController *listViewController;
+@property (nonatomic, strong) CBEditListViewController *editListViewController;
 @end
 
 @implementation ViewController
@@ -20,6 +21,8 @@
     [super viewDidLoad];
     
     self.listViewController = [CBListViewController new];
+    self.editListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"sampleitems"];
+    
     self.listViewController.items = @[
                                       [SampleItem itemWithName:@"One" subtitle:@"This is one."],
                                       [SampleItem itemWithName:@"Two" subtitle:@"This is two."],
@@ -27,11 +30,13 @@
                                       [SampleItem itemWithName:@"Four" subtitle:@"This is four."],
                                       [SampleItem itemWithName:@"Five" subtitle:@"This is five."],
                                       ];
+    self.editListViewController.items = [self.listViewController.items copy];
     
+    /* not needed, but possible
     [self.listViewController configureCellBlock:^UITableViewCell *(NSIndexPath *indexPath, UITableViewCell *cell) {
         return cell;
     }];
-    
+    */
     __typeof__(self) __weak weakSelf = self;
     [self.listViewController configureCellSelectedBlock:^(NSIndexPath *indexPath, id item) {
         [weakSelf.listViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -39,8 +44,7 @@
 }
 
 - (IBAction)listButtonPressed:(id)sender {
-    self.listViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:self.listViewController animated:YES completion:nil];
+    [self presentViewController:self.editListViewController animated:YES completion:nil];
 }
 
 - (IBAction)listBarButtonItemPressed:(id)sender {

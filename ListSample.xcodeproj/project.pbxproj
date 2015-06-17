@@ -17,6 +17,8 @@
 		927382591B2FAC5600F2F239 /* CBListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 927382581B2FAC5600F2F239 /* CBListViewController.m */; };
 		9273825C1B2FAC6800F2F239 /* CBEditListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273825B1B2FAC6800F2F239 /* CBEditListViewController.m */; };
 		9273825F1B2FB73000F2F239 /* SampleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273825E1B2FB73000F2F239 /* SampleItem.m */; };
+		927382631B2FC6A100F2F239 /* CBEditListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 927382621B2FC6A100F2F239 /* CBEditListViewCell.m */; };
+		927382661B311FBE00F2F239 /* SampleItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 927382651B311FBE00F2F239 /* SampleItemListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,10 @@
 		9273825D1B2FB73000F2F239 /* SampleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleItem.h; path = Classes/SampleItem.h; sourceTree = "<group>"; };
 		9273825E1B2FB73000F2F239 /* SampleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleItem.m; path = Classes/SampleItem.m; sourceTree = "<group>"; };
 		927382601B2FB77100F2F239 /* CBListViewControllerListItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CBListViewControllerListItem.h; sourceTree = "<group>"; };
+		927382611B2FC6A100F2F239 /* CBEditListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBEditListViewCell.h; sourceTree = "<group>"; };
+		927382621B2FC6A100F2F239 /* CBEditListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBEditListViewCell.m; sourceTree = "<group>"; };
+		927382641B311FBE00F2F239 /* SampleItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleItemListViewController.h; path = Classes/SampleItemListViewController.h; sourceTree = "<group>"; };
+		927382651B311FBE00F2F239 /* SampleItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleItemListViewController.m; path = Classes/SampleItemListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,8 @@
 				927382301B2FABA100F2F239 /* AppDelegate.m */,
 				9273825D1B2FB73000F2F239 /* SampleItem.h */,
 				9273825E1B2FB73000F2F239 /* SampleItem.m */,
+				927382641B311FBE00F2F239 /* SampleItemListViewController.h */,
+				927382651B311FBE00F2F239 /* SampleItemListViewController.m */,
 				927382321B2FABA100F2F239 /* ViewController.h */,
 				927382331B2FABA100F2F239 /* ViewController.m */,
 				927382351B2FABA100F2F239 /* Main.storyboard */,
@@ -135,11 +143,13 @@
 		927382561B2FAC4900F2F239 /* CBList */ = {
 			isa = PBXGroup;
 			children = (
+				927382601B2FB77100F2F239 /* CBListViewControllerListItem.h */,
 				927382571B2FAC5600F2F239 /* CBListViewController.h */,
 				927382581B2FAC5600F2F239 /* CBListViewController.m */,
 				9273825A1B2FAC6800F2F239 /* CBEditListViewController.h */,
 				9273825B1B2FAC6800F2F239 /* CBEditListViewController.m */,
-				927382601B2FB77100F2F239 /* CBListViewControllerListItem.h */,
+				927382611B2FC6A100F2F239 /* CBEditListViewCell.h */,
+				927382621B2FC6A100F2F239 /* CBEditListViewCell.m */,
 			);
 			name = CBList;
 			path = Classes/CBList;
@@ -249,6 +259,8 @@
 				927382591B2FAC5600F2F239 /* CBListViewController.m in Sources */,
 				9273825F1B2FB73000F2F239 /* SampleItem.m in Sources */,
 				927382311B2FABA100F2F239 /* AppDelegate.m in Sources */,
+				927382631B2FC6A100F2F239 /* CBEditListViewCell.m in Sources */,
+				927382661B311FBE00F2F239 /* SampleItemListViewController.m in Sources */,
 				9273825C1B2FAC6800F2F239 /* CBEditListViewController.m in Sources */,
 				9273822E1B2FABA100F2F239 /* main.m in Sources */,
 			);
