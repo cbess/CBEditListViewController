@@ -20,6 +20,12 @@
 @implementation CBEditListViewController
 @synthesize items;
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.deselectSelectedRow = YES;
+}
+
 #pragma mark - Properties
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
@@ -52,7 +58,7 @@
     [super setEditing:editing animated:animated];
 }
 
-#pragma mark - Misc
+#pragma mark - List Actions
 
 - (void)willRemoveItem:(id)item {
     // empty
@@ -65,6 +71,8 @@
 - (void)didChangeItem:(id)item toName:(NSString *)name {
     // empty
 }
+
+#pragma mark - Misc
 
 - (BOOL)isStringEmpty:(NSString *)text {
     if (!text.length) {
@@ -89,13 +97,13 @@
         return self.addListItemViewCell;
     }
     
-    --row; // take off one to account for the 'add item' row
-    indexPath = [NSIndexPath indexPathForRow:row inSection:indexPath.section];
+    // take off one to account for the 'add item' row
+    indexPath = [NSIndexPath indexPathForRow:(--row) inSection:indexPath.section];
     CBEditListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifierAtIndexPath:indexPath]
                                                                forIndexPath:indexPath];
     cell.textField.delegate = self;
     cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    cell.textField.tag = row;
+    cell.textField.tag = indexPath.row;
     
     [self configureCell:cell atIndexPath:indexPath];
     
@@ -157,8 +165,7 @@
                                                             message:NSLocalizedString(@"Enter a name.", nil)
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                  otherButtonTitles:NSLocalizedString(@"Save", nil),
-                                  nil];
+                                                  otherButtonTitles:NSLocalizedString(@"Save", nil), nil];
         alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
         // configure text field
         UITextField *textField = [alertView textFieldAtIndex:0];
