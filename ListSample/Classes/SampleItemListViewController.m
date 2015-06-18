@@ -19,10 +19,6 @@
     
     self.addListItemViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"add"];
     self.addListItemViewCell.textLabel.text = @"Add Sample Item";
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                           target:self
-                                                                                           action:@selector(doneButtonPressed:)];
 }
 
 - (NSString *)cellIdentifierAtIndexPath:(NSIndexPath *)indexPath {
@@ -47,12 +43,6 @@
 
 - (void)didChangeListItem:(SampleItem *)item toName:(NSString *)name {
     item.name = name;
-}
-
-#pragma mark - Events
-
-- (void)doneButtonPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

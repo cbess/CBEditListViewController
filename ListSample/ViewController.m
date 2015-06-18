@@ -23,6 +23,7 @@
     self.listViewController = [CBListViewController new];
     self.editListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"sampleitems"];
     
+    self.listViewController.title = NSLocalizedString(@"List", nil);
     self.listViewController.items = @[
                                       [SampleItem itemWithName:@"One" subtitle:@"This is one."],
                                       [SampleItem itemWithName:@"Two" subtitle:@"This is two."],
@@ -41,6 +42,13 @@
     [self.listViewController configureCellSelectedBlock:^(NSIndexPath *indexPath, id item) {
         [weakSelf.listViewController.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }];
+    
+    // add done button
+    UIBarButtonItem *doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                       target:self
+                                                                                       action:@selector(doneButtonPressed:)];
+    self.listViewController.navigationItem.rightBarButtonItem = doneBarButtonItem;
+    self.editListViewController.navigationItem.rightBarButtonItem = doneBarButtonItem;
 }
 
 - (IBAction)listButtonPressed:(id)sender {
@@ -49,13 +57,18 @@
 }
 
 - (IBAction)listBarButtonItemPressed:(id)sender {
-    self.listViewController.modalPresentationStyle = UIModalPresentationPopover;
-    [self presentViewController:self.listViewController animated:YES completion:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.listViewController];
+    navController.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:navController animated:YES completion:nil];
     
     // setup the popover use the UIPopoverPresentationController
-    UIPopoverPresentationController *popoverCtrl = self.listViewController.popoverPresentationController;
+    UIPopoverPresentationController *popoverCtrl = navController.popoverPresentationController;
     popoverCtrl.permittedArrowDirections = UIPopoverArrowDirectionUp;
     popoverCtrl.barButtonItem = sender;
+}
+
+- (void)doneButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
