@@ -47,7 +47,7 @@
             NSUInteger row = cell.textField.tag;
             
             // cancel, edit, and focus field
-            [self willRemoveItem:self.items[row]];
+            [self willRemoveListItem:self.items[row]];
             [self.items removeObjectAtIndex:row];
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row + 1 inSection:0];
@@ -60,15 +60,15 @@
 
 #pragma mark - List Actions
 
-- (void)willRemoveItem:(id)item {
+- (void)willRemoveListItem:(id)item {
     // empty
 }
 
-- (void)didInsertItemWithName:(NSString *)name {
+- (void)didInsertListItemWithName:(NSString *)name {
     // empty
 }
 
-- (void)didChangeItem:(id)item toName:(NSString *)name {
+- (void)didChangeListItem:(id)item toName:(NSString *)name {
     // empty
 }
 
@@ -131,7 +131,7 @@
         CBEditListViewCell *cell = (CBEditListViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         [cell.textField resignFirstResponder];
         
-        [self willRemoveItem:self.activeItems[indexPath.row - 1]];
+        [self willRemoveListItem:self.activeItems[indexPath.row - 1]];
         
         // remove the row
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -172,7 +172,6 @@
         textField.placeholder = NSLocalizedString(@"Name", nil);
         textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         textField.returnKeyType = UIReturnKeyDone;
-        textField.delegate = self;
         textField.tag = kAlertViewTextFieldTag;
         [alertView show];
         
@@ -190,7 +189,7 @@
         return YES;
     
     id item = self.activeItems[textField.tag];
-    [self didChangeItem:item toName:textField.text];
+    [self didChangeListItem:item toName:textField.text];
     
     BOOL endEdit = ![self isStringEmpty:textField.text];
     return endEdit;
@@ -198,6 +197,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+#if 0
     if (self.insertItemAlertView)
     {
         // insert item alertview
@@ -208,6 +208,7 @@
         }
     }
     else
+#endif
         [textField resignFirstResponder];
     
     return YES;
@@ -216,7 +217,7 @@
 #pragma mark - Table Management
 - (void)insertItemWithName:(NSString *)name animated:(BOOL)animated
 {
-    [self didInsertItemWithName:name];
+    [self didInsertListItemWithName:name];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeItems.count inSection:0];
     UITableViewRowAnimation animationStyle = UITableViewRowAnimationNone;

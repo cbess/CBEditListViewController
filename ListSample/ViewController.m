@@ -30,7 +30,7 @@
                                       [SampleItem itemWithName:@"Four" subtitle:@"This is four."],
                                       [SampleItem itemWithName:@"Five" subtitle:@"This is five."],
                                       ];
-    self.editListViewController.items = [self.listViewController.items copy];
+    self.editListViewController.items = [self.listViewController.items mutableCopy];
     
     /* not needed, but possible
     [self.listViewController configureCellBlock:^UITableViewCell *(NSIndexPath *indexPath, UITableViewCell *cell) {
@@ -44,7 +44,8 @@
 }
 
 - (IBAction)listButtonPressed:(id)sender {
-    [self presentViewController:self.editListViewController animated:YES completion:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.editListViewController];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (IBAction)listBarButtonItemPressed:(id)sender {
