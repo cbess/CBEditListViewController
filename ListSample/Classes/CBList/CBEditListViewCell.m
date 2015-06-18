@@ -10,4 +10,11 @@
 
 @implementation CBEditListViewCell
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    // The user can only edit the text field when in editing mode.
+    [super setEditing:editing animated:animated];
+    
+    self.textField.enabled = editing;
+}
+
 @end

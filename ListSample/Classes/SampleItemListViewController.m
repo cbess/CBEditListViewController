@@ -19,7 +19,19 @@
     
     self.addListItemViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"add"];
     self.addListItemViewCell.textLabel.text = @"Add Sample Item";
+    
+    // use built-in edit button
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    
+    // disable the done button, if editing
+    self.navigationItem.rightBarButtonItem.enabled = !editing;
+}
+
+#pragma mark - Misc
 
 - (NSString *)cellIdentifierAtIndexPath:(NSIndexPath *)indexPath {
     return @"cell";
