@@ -52,7 +52,7 @@ static NSString * const kCellIdentifier = @"cblistcell";
     return kCellIdentifier;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath {
     if (self.configureCellBlock) {
         id aCell = self.configureCellBlock(indexPath, cell);
         
@@ -81,7 +81,7 @@ static NSString * const kCellIdentifier = @"cblistcell";
         cell.detailTextLabel.text = [listItem displayDetailTitle];
     }
     
-    [self configureCell:cell atIndexPath:indexPath];
+    [self configureCell:cell indexPath:indexPath];
     
     return cell;
 }

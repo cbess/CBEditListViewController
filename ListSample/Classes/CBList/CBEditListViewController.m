@@ -105,7 +105,7 @@
     cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     cell.textField.tag = indexPath.row;
     
-    [self configureCell:cell atIndexPath:indexPath];
+    [self configureCell:cell indexPath:indexPath];
     
     return cell;
 }

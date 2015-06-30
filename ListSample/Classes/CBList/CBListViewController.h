@@ -48,7 +48,7 @@ typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath *index
 - (void)configureCellSelectedBlock:(CBListViewControllerConfigureCellSelectedBlock)block;
 
 /// Handles the configuration of the specified table view cell at the specified index path
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath;
 
 @end
 
