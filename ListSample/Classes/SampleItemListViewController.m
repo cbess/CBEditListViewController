@@ -37,7 +37,7 @@
     return @"cell";
 }
 
-- (void)configureCell:(CBEditListViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(CBEditListViewCell *)cell indexPath:(NSIndexPath *)indexPath {
     SampleItem *item = self.activeItems[indexPath.row];
     cell.textField.text = [item displayTitle];
 }
