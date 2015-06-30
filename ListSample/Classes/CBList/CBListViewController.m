@@ -8,7 +8,7 @@
 
 #import "CBListViewController.h"
 
-static NSString * const kCellIdentifier = @"cblistcell";
+static NSString * const kCellIdentifier = @"cell";
 
 @interface CBListViewController ()
 @property (nonatomic, assign) BOOL searchActive;
