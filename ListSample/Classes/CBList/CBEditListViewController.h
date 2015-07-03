@@ -12,7 +12,6 @@
 
 @interface CBEditListViewController : CBListViewController
 
-@property (nonatomic, weak) id item;
 @property (nonatomic, strong) NSMutableArray *items;
 @property (nonatomic, strong) UITableViewCell *addListItemViewCell;
 @property (nonatomic, assign) BOOL deselectSelectedRow;

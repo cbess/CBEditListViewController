@@ -63,6 +63,12 @@ static NSString * const kCellIdentifier = @"cell";
     }
 }
 
+- (void)didSelectCellAtIndexPath:(NSIndexPath *)indexPath item:(id)item {
+    if (self.configureCellSelectedBlock) {
+        self.configureCellSelectedBlock(indexPath, item);
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -87,9 +93,7 @@ static NSString * const kCellIdentifier = @"cell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.configureCellSelectedBlock) {
-        self.configureCellSelectedBlock(indexPath, self.activeItems[indexPath.row]);
-    }
+    [self didSelectCellAtIndexPath:indexPath item:self.activeItems[indexPath.row]];
 }
 
 @end

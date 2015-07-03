@@ -156,8 +156,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
-    {
+    if (self.deselectSelectedRow)
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         // 'add item' was tapped
@@ -176,10 +178,9 @@
         [alertView show];
         
         self.insertItemAlertView = alertView;
+    } else {
+        [self didSelectCellAtIndexPath:indexPath item:self.activeItems[indexPath.row - 1]];
     }
-    
-    if (self.deselectSelectedRow)
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - UITextFieldDelegate
