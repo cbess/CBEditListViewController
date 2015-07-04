@@ -17,7 +17,7 @@
 @property (nonatomic, assign) BOOL deselectSelectedRow;
 
 /// The item is about to be removed from the list.
-/// The data source should remove from the item. But, you can use it before it is removed.
+/// The data source should remove the item. But, you can use it before it is removed.
 - (void)willRemoveListItem:(id)item;
 
 /// An item was inserted into the list with the specified name.
