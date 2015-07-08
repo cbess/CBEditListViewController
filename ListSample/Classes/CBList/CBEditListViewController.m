@@ -33,22 +33,20 @@
     if (!editing)
     {
         // try to find an empty item name field
-        NSUInteger index = [self.tableView.visibleCells indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            if (![obj isKindOfClass:[CBEditListViewCell class]])
+        NSUInteger index = [self.tableView.visibleCells indexOfObjectPassingTest:^BOOL(CBEditListViewCell *cell, NSUInteger idx, BOOL *stop) {
+            if (![cell isKindOfClass:[CBEditListViewCell class]])
                 return NO;
             
-            CBEditListViewCell *cell = obj;
             return [self isStringEmpty:cell.textField.text];
         }];
         
+        // remove the 'empty' item for the row that was inserted
         if (index != NSNotFound)
         {
             CBEditListViewCell *cell = (CBEditListViewCell*) self.tableView.visibleCells[index];
             NSUInteger row = cell.textField.tag;
             
-            // cancel, edit, and focus field
             [self willRemoveListItem:self.items[row]];
-            [self.items removeObjectAtIndex:row];
             
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row + 1 inSection:0];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -98,14 +96,15 @@
     }
     
     // take off one to account for the 'add item' row
-    indexPath = [NSIndexPath indexPathForRow:(--row) inSection:indexPath.section];
-    CBEditListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifierAtIndexPath:indexPath]
-                                                               forIndexPath:indexPath];
+    // the index path must be adjusted for the orig data source, rather than the UI
+    NSIndexPath *dataIndexPath = [NSIndexPath indexPathForRow:(--row) inSection:indexPath.section];
+    CBEditListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifierAtIndexPath:dataIndexPath]
+                                                               forIndexPath:dataIndexPath];
     cell.textField.delegate = self;
     cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    cell.textField.tag = indexPath.row;
+    cell.textField.tag = dataIndexPath.row;
     
-    [self configureCell:cell indexPath:indexPath];
+    [self configureCell:cell indexPath:dataIndexPath];
     
     return cell;
 }

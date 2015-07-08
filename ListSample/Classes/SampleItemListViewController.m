@@ -34,7 +34,7 @@
 #pragma mark - Misc
 
 - (NSString *)cellIdentifierAtIndexPath:(NSIndexPath *)indexPath {
-    return @"cell";
+    return @"sampleitemcell";
 }
 
 - (void)configureCell:(CBEditListViewCell *)cell indexPath:(NSIndexPath *)indexPath {
