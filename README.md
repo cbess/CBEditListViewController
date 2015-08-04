@@ -9,7 +9,7 @@ The actions for the CRUD operations can be customized.
 
 ## Usage
 
-Swift example with Realm.io database storage.
+Swift example with [Realm](http://realm.io) *v0.94.0* database storage.
 
 ```swift
 import UIKit
