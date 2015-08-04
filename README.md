@@ -23,7 +23,7 @@ class GroupsViewController: CBEditListViewController {
         super.viewDidLoad()
         
         addListItemViewCell = UITableViewCell(style: .Default, reuseIdentifier: "add")
-        addListItemViewCell.textLabel?.text = NSLocalizedString("Add Portfolio", comment: "")
+        addListItemViewCell.textLabel?.text = NSLocalizedString("Add Group", comment: "")
         
         navigationItem.rightBarButtonItem = editButtonItem()
         reloadItems()
