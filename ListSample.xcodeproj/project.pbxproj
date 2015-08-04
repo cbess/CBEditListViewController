@@ -19,6 +19,7 @@
 		9273825F1B2FB73000F2F239 /* SampleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273825E1B2FB73000F2F239 /* SampleItem.m */; };
 		927382631B2FC6A100F2F239 /* CBEditListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 927382621B2FC6A100F2F239 /* CBEditListViewCell.m */; };
 		927382661B311FBE00F2F239 /* SampleItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 927382651B311FBE00F2F239 /* SampleItemListViewController.m */; };
+		92B1108B1B707A5E00942732 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 92B1108A1B707A5E00942732 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		927382621B2FC6A100F2F239 /* CBEditListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBEditListViewCell.m; sourceTree = "<group>"; };
 		927382641B311FBE00F2F239 /* SampleItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleItemListViewController.h; path = Classes/SampleItemListViewController.h; sourceTree = "<group>"; };
 		927382651B311FBE00F2F239 /* SampleItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleItemListViewController.m; path = Classes/SampleItemListViewController.m; sourceTree = "<group>"; };
+		92B1108A1B707A5E00942732 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		9273821F1B2FABA100F2F239 = {
 			isa = PBXGroup;
 			children = (
+				92B1108A1B707A5E00942732 /* README.md */,
 				9273822A1B2FABA100F2F239 /* ListSample */,
 				927382441B2FABA100F2F239 /* ListSampleTests */,
 				927382291B2FABA100F2F239 /* Products */,
@@ -261,6 +264,7 @@
 				927382311B2FABA100F2F239 /* AppDelegate.m in Sources */,
 				927382631B2FC6A100F2F239 /* CBEditListViewCell.m in Sources */,
 				927382661B311FBE00F2F239 /* SampleItemListViewController.m in Sources */,
+				92B1108B1B707A5E00942732 /* README.md in Sources */,
 				9273825C1B2FAC6800F2F239 /* CBEditListViewController.m in Sources */,
 				9273822E1B2FABA100F2F239 /* main.m in Sources */,
 			);
@@ -459,6 +463,7 @@
 				9273824D1B2FABA100F2F239 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9273824E1B2FABA100F2F239 /* Build configuration list for PBXNativeTarget "ListSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +472,7 @@
 				927382501B2FABA100F2F239 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
