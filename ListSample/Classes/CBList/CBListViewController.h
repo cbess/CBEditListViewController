@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CBListViewControllerListItem.h"
 
-typedef UITableViewCell *(^CBListViewControllerConfigureCellBlock)(NSIndexPath *indexPath, id cell);
-typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath *indexPath, id item);
+typedef UITableViewCell  * _Nullable (^CBListViewControllerConfigureCellBlock)(NSIndexPath * _Nonnull indexPath, id _Nonnull cell);
+typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath * _Nonnull indexPath, id _Nonnull item);
 
 /**
  Represents a list view controller.
@@ -19,13 +19,13 @@ typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath *index
 @interface CBListViewController : UITableViewController
 
 /// The items displayed in the list.
-@property (nonatomic, strong) NSArray *items;
+@property (nonatomic, strong, nullable) NSArray *items;
 
 /// The search results displayed in the search list.
-@property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong, nullable) NSArray *searchResults;
 
 /// Normal items or search results, depending on if search is active.
-@property (nonatomic, readonly) NSArray *activeItems;
+@property (nonatomic, readonly, nullable) NSArray *activeItems;
 
 /**
  Configures the table view. By default it registers the default cell class.
@@ -37,21 +37,21 @@ typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath *index
 - (void)reloadData;
 
 /// The cell identifier for the cell at the specified index path
-- (NSString *)cellIdentifierAtIndexPath:(NSIndexPath *)indexPath;
+- (NSString * _Nonnull)cellIdentifierAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 
 /**
  Configure the cell for the specified index path. It can be altered or a new one returned, or nil to use the default.
  */
-- (void)configureCellBlock:(CBListViewControllerConfigureCellBlock)block;
+- (void)configureCellBlock:(nullable CBListViewControllerConfigureCellBlock)block;
 
 /// Configures the cell selected block.
-- (void)configureCellSelectedBlock:(CBListViewControllerConfigureCellSelectedBlock)block;
+- (void)configureCellSelectedBlock:(nullable CBListViewControllerConfigureCellSelectedBlock)block;
 
 /// Handles the configuration of the specified table view cell at the specified index path
-- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(UITableViewCell * _Nonnull)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
 
 /// The cell at the specified index path was selected.
-- (void)didSelectCellAtIndexPath:(NSIndexPath *)indexPath item:(id)item;
+- (void)didSelectCellAtIndexPath:(NSIndexPath * _Nonnull)indexPath item:(id _Nonnull)item;
 
 @end
 
