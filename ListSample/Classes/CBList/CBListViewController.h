@@ -36,7 +36,7 @@ typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath * _Non
 /// Reloads the table data.
 - (void)reloadData;
 
-/// The cell identifier for the cell at the specified index path
+/// The cell identifier for the cell at the specified index path. Defaults to 'cell'.
 - (NSString * _Nonnull)cellIdentifierAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 
 /**
