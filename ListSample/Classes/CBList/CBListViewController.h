@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CBListViewControllerListItem.h"
 
-typedef UITableViewCell  * _Nullable (^CBListViewControllerConfigureCellBlock)(NSIndexPath * _Nonnull indexPath, id _Nonnull cell);
+typedef UITableViewCell  * _Nullable (^CBListViewControllerConfigureCellBlock)(NSIndexPath * _Nonnull indexPath, UITableViewCell * _Nonnull cell);
 typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath * _Nonnull indexPath, id _Nonnull item);
 
 /**
