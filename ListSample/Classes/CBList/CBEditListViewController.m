@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _itemsSection = 0;
     self.deselectSelectedRow = YES;
 }
 
@@ -219,7 +220,7 @@
 {
     [self didInsertListItemWithName:name];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeItems.count inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeItems.count inSection:self.itemsSection];
     UITableViewRowAnimation animationStyle = UITableViewRowAnimationNone;
     if (animated)
         animationStyle = UITableViewRowAnimationFade;
@@ -242,7 +243,7 @@
     if (index != NSNotFound)
     {
         CBEditListViewCell *cell = (CBEditListViewCell*) self.tableView.visibleCells[index];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cell.textField.tag inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cell.textField.tag inSection:self.itemsSection];
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         return;
     }
@@ -250,7 +251,7 @@
     [self insertItemWithName:@"" animated:animated];
     
     // Start editing the item's name
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeItems.count inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeItems.count inSection:self.itemsSection];
     CBEditListViewCell *cell = (CBEditListViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     [cell.textField becomeFirstResponder];
 }

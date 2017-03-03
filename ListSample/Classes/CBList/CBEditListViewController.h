@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSMutableArray *items;
 @property (nonatomic, strong) UITableViewCell *addListItemViewCell;
 @property (nonatomic, assign) BOOL deselectSelectedRow;
+/// The table section for items. Defaults to 0.
+@property (nonatomic, readonly) NSInteger itemsSection;
 
 /// The item is about to be removed from the list.
 /// The data source should remove the item. But, you can use it before it is removed.
