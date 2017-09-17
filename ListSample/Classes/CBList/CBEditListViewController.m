@@ -98,9 +98,8 @@
     
     // take off one to account for the 'add item' row
     // the index path must be adjusted for the orig data source, rather than the UI
-    NSIndexPath *dataIndexPath = [NSIndexPath indexPathForRow:(--row) inSection:indexPath.section];
-    CBEditListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifierAtIndexPath:dataIndexPath]
-                                                               forIndexPath:dataIndexPath];
+    NSIndexPath *dataIndexPath = [NSIndexPath indexPathForRow:(row - 1) inSection:indexPath.section];
+    CBEditListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifierAtIndexPath:dataIndexPath]];
     cell.textField.delegate = self;
     cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     cell.textField.tag = dataIndexPath.row;
