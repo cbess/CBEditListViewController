@@ -117,6 +117,10 @@
         return UITableViewCellEditingStyleInsert;
     }
     
+    if (indexPath.section != self.itemsSection) {
+        return UITableViewCellEditingStyleNone;
+    }
+    
     return UITableViewCellEditingStyleDelete;
 }
 
@@ -124,6 +128,11 @@
 {
     if (!indexPath)
         return;
+    
+    // only allow commits from the 'items' section
+    if (indexPath.section != self.itemsSection) {
+        return;
+    }
     
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
