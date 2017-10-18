@@ -17,6 +17,8 @@
 @property (nonatomic, assign) BOOL deselectSelectedRow;
 /// The table section for items. Defaults to 0.
 @property (nonatomic, readonly) NSInteger itemsSection;
+@property (nonatomic, copy, readonly) NSString *addListItemAlertTitle;
+@property (nonatomic, copy, readonly) NSString *addListItemAlertPlaceholder;
 
 /// The item is about to be removed from the list.
 /// The data source should remove the item. But, you can use it before it is removed.

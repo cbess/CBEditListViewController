@@ -29,6 +29,14 @@
 
 #pragma mark - Properties
 
+- (NSString *)addListItemAlertTitle {
+    return NSLocalizedString(@"New Item", nil);
+}
+
+- (NSString *)addListItemAlertPlaceholder {
+    return NSLocalizedString(@"Name", nil);
+}
+
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     if (!editing)
@@ -151,6 +159,7 @@
 }
 
 #pragma mark - Row selection
+
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Disable selection of the Add row while editing
@@ -171,7 +180,7 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         // 'add item' was tapped
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"New Item", nil)
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:self.addListItemAlertTitle
                                                             message:NSLocalizedString(@"Enter a name.", nil)
                                                            delegate:self
                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
@@ -179,7 +188,7 @@
         alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
         // configure text field
         UITextField *textField = [alertView textFieldAtIndex:0];
-        textField.placeholder = NSLocalizedString(@"Name", nil);
+        textField.placeholder = self.addListItemAlertPlaceholder;
         textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         textField.returnKeyType = UIReturnKeyDone;
         textField.tag = kAlertViewTextFieldTag;
