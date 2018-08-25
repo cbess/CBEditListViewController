@@ -37,7 +37,7 @@ NS_CLASS_AVAILABLE_IOS(9_0) @interface CBListViewController : UITableViewControl
  */
 - (void)configureTableView;
 
-/// Configures the UIPopover settings.
+/// Configures this view controller to present as a UIPopover. Must be called before presented.
 - (void)configureForPopover;
 
 /// Reloads the table data.

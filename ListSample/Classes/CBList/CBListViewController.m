@@ -21,7 +21,6 @@ static NSString * const kCellIdentifier = @"cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self configureForPopover];
     [self configureTableView];
 }
 
