@@ -57,12 +57,11 @@
 }
 
 - (IBAction)listBarButtonItemPressed:(id)sender {
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.listViewController];
-    navController.modalPresentationStyle = UIModalPresentationPopover;
-    [self presentViewController:navController animated:YES completion:nil];
+    [self.listViewController configureForPopover];
+    [self presentViewController:self.listViewController animated:YES completion:nil];
     
     // setup the popover use the UIPopoverPresentationController
-    UIPopoverPresentationController *popoverCtrl = navController.popoverPresentationController;
+    UIPopoverPresentationController *popoverCtrl = self.listViewController.popoverPresentationController;
     popoverCtrl.permittedArrowDirections = UIPopoverArrowDirectionUp;
     popoverCtrl.barButtonItem = sender;
 }

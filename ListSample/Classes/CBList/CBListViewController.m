@@ -21,6 +21,7 @@ static NSString * const kCellIdentifier = @"cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self configureForPopover];
     [self configureTableView];
 }
 
@@ -28,6 +29,17 @@ static NSString * const kCellIdentifier = @"cell";
 
 - (NSArray *)activeItems {
     return (self.searchActive ? self.searchResults : self.items);
+}
+
+- (UIModalPresentationStyle)popoverPresentationStyle {
+    // return None to present as a popover on both iPhone and iPad
+    return UIModalPresentationNone;
+}
+
+#pragma mark - UIPopover
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+    return self.popoverPresentationStyle;
 }
 
 #pragma mark - Misc
@@ -46,6 +58,13 @@ static NSString * const kCellIdentifier = @"cell";
 
 - (void)configureTableView {
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+}
+
+- (void)configureForPopover {
+    self.preferredContentSize = CGSizeMake(250, 350);
+    // pres style must be set before accessing popoverPresentationController property
+    self.modalPresentationStyle = UIModalPresentationPopover;
+    self.popoverPresentationController.delegate = self;
 }
 
 - (NSString *)cellIdentifierAtIndexPath:(NSIndexPath *)indexPath {

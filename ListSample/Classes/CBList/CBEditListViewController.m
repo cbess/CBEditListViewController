@@ -9,11 +9,9 @@
 #import "CBEditListViewController.h"
 #import "CBEditListViewCell.h"
 
-#define kAlertViewTextFieldTag 99
-
 @interface CBEditListViewController () <UITextFieldDelegate>
 
-@property (nonatomic, strong) UIAlertView *insertItemAlertView;
+@property (nonatomic, strong) UIAlertController *insertItemAlertController;
 
 @end
 
@@ -37,10 +35,8 @@
     return NSLocalizedString(@"Name", nil);
 }
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    if (!editing)
-    {
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    if (!editing) {
         // try to find an empty item name field
         NSUInteger index = [self.tableView.visibleCells indexOfObjectPassingTest:^BOOL(CBEditListViewCell *cell, NSUInteger idx, BOOL *stop) {
             if (![cell isKindOfClass:[CBEditListViewCell class]])
@@ -50,8 +46,7 @@
         }];
         
         // remove the 'empty' item for the row that was inserted
-        if (index != NSNotFound)
-        {
+        if (index != NSNotFound) {
             CBEditListViewCell *cell = (CBEditListViewCell*) self.tableView.visibleCells[index];
             NSUInteger row = cell.textField.tag;
             
@@ -81,6 +76,17 @@
 
 #pragma mark - Misc
 
+- (void)alertControllerSaveButtonPressed:(UIAlertController *)alertController {
+    // insert the item
+    UITextField *textField = alertController.textFields.firstObject;
+    if ([self isStringEmpty:textField.text])
+        return;
+    
+    [self insertItemWithName:textField.text animated:YES];
+    
+    self.insertItemAlertController = nil;
+}
+
 - (BOOL)isStringEmpty:(NSString *)text {
     if (!text.length) {
         return YES;
@@ -92,8 +98,7 @@
 
 #pragma mark - Table DataSource/Delegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.activeItems.count + 1; // added 1 more for 'add item' row
 }
 
@@ -117,11 +122,9 @@
     return cell;
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     // The add row gets an insertion marker, the others a delete marker.
-    if (indexPath.row == 0)
-    {
+    if (indexPath.row == 0) {
         return UITableViewCellEditingStyleInsert;
     }
     
@@ -132,8 +135,7 @@
     return UITableViewCellEditingStyleDelete;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!indexPath)
         return;
     
@@ -142,8 +144,7 @@
         return;
     }
     
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
         CBEditListViewCell *cell = (CBEditListViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         [cell.textField resignFirstResponder];
         
@@ -151,58 +152,57 @@
         
         // remove the row
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert)
-    {
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         [self insertItemAnimated:YES];
     }
 }
 
 #pragma mark - Row selection
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Disable selection of the Add row while editing
-    if (tableView.editing && indexPath.row == 0)
-    {
+    if (tableView.editing && indexPath.row == 0) {
         return nil;
     }
     
     return indexPath;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.deselectSelectedRow)
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    // if 'add item' was tapped
     if (indexPath.row == 0) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
-        // 'add item' was tapped
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:self.addListItemAlertTitle
-                                                            message:NSLocalizedString(@"Enter a name.", nil)
-                                                           delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                  otherButtonTitles:NSLocalizedString(@"Save", nil), nil];
-        alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-        // configure text field
-        UITextField *textField = [alertView textFieldAtIndex:0];
-        textField.placeholder = self.addListItemAlertPlaceholder;
-        textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
-        textField.returnKeyType = UIReturnKeyDone;
-        textField.tag = kAlertViewTextFieldTag;
-        [alertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:self.addListItemAlertTitle
+                                                                                 message:NSLocalizedString(@"Enter a name.", nil)
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        __typeof__(self) __weak weakSelf = self;
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            weakSelf.insertItemAlertController = nil;
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Save", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [weakSelf alertControllerSaveButtonPressed:weakSelf.insertItemAlertController];
+        }]];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = self.addListItemAlertPlaceholder;
+            textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+            textField.returnKeyType = UIReturnKeyDone;
+        }];
         
-        self.insertItemAlertView = alertView;
+        self.insertItemAlertController = alertController;
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     } else {
         [self didSelectCellAtIndexPath:indexPath item:self.activeItems[indexPath.row - 1]];
     }
 }
 
 #pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if (textField.tag >= self.activeItems.count)
         return YES;
     
@@ -213,28 +213,15 @@
     return endEdit;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-#if 0
-    if (self.insertItemAlertView)
-    {
-        // insert item alertview
-        UITextField *field = [self.insertItemAlertView textFieldAtIndex:0];
-        if (field == textField)
-        {
-            [self.insertItemAlertView dismissWithClickedButtonIndex:1 /* Save button */ animated:YES];
-        }
-    }
-    else
-#endif
-        [textField resignFirstResponder];
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
     
     return YES;
 }
 
 #pragma mark - Table Management
-- (void)insertItemWithName:(NSString *)name animated:(BOOL)animated
-{
+
+- (void)insertItemWithName:(NSString *)name animated:(BOOL)animated {
     [self didInsertListItemWithName:name];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeItems.count inSection:self.itemsSection];
@@ -245,8 +232,7 @@
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
-- (void)insertItemAnimated:(BOOL)animated
-{
+- (void)insertItemAnimated:(BOOL)animated {
     // prevent adding another item, when an empty field is available
     // try to find an empty item name field
     NSUInteger index = [self.tableView.visibleCells indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -257,8 +243,7 @@
         return [self isStringEmpty:cell.textField.text];
     }];
     
-    if (index != NSNotFound)
-    {
+    if (index != NSNotFound) {
         CBEditListViewCell *cell = (CBEditListViewCell*) self.tableView.visibleCells[index];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:cell.textField.tag inSection:self.itemsSection];
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -271,23 +256,6 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.activeItems.count inSection:self.itemsSection];
     CBEditListViewCell *cell = (CBEditListViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     [cell.textField becomeFirstResponder];
-}
-
-#pragma mark - AlertView Delegate
-
-- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        // insert the item
-        UITextField *textField = [alertView textFieldAtIndex:0];
-        if ([self isStringEmpty:textField.text])
-            return;
-        
-        [self insertItemWithName:textField.text animated:YES];
-    }
-    
-    self.insertItemAlertView = nil;
 }
 
 @end

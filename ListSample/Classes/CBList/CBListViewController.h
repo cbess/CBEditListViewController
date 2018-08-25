@@ -16,7 +16,7 @@ typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath * _Non
  Represents a list view controller.
  The UITableViewDataSource methods should be overriden to avoid overhead if using custom cells.
  */
-@interface CBListViewController : UITableViewController
+NS_CLASS_AVAILABLE_IOS(9_0) @interface CBListViewController : UITableViewController <UIPopoverPresentationControllerDelegate>
 
 /// The items displayed in the list.
 @property (nonatomic, strong, nullable) NSArray *items;
@@ -27,11 +27,18 @@ typedef void(^CBListViewControllerConfigureCellSelectedBlock)(NSIndexPath * _Non
 /// Normal items or search results, depending on if search is active.
 @property (nonatomic, readonly, nullable) NSArray *activeItems;
 
+/// The presentation style to use when presented as a UIPopover (iPhone/iPad).
+/// Defaults to UIModalPresentationStyleNone, to present it as a popover for both idioms.
+@property (nonatomic, readonly) UIModalPresentationStyle popoverPresentationStyle;
+
 /**
  Configures the table view. By default it registers the default cell class.
  Avoid calling super to ignore default configuration.
  */
 - (void)configureTableView;
+
+/// Configures the UIPopover settings.
+- (void)configureForPopover;
 
 /// Reloads the table data.
 - (void)reloadData;
